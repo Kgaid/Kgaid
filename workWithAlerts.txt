@@ -1,0 +1,50 @@
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "C:\\WebDriver\\chromedriver.exe");
+
+        WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2000));
+
+
+        try {
+            driver.get("http://100.0.0.0:0000/testing%20automation/example.html");
+            Thread.sleep(5000);
+
+            WebElement button1 = driver.findElement(By.id("a"));
+            WebElement button2 = driver.findElement(By.id("b"));
+            WebElement button3 = driver.findElement(By.id("c"));
+
+            button1.click();
+            Alert alert = wait.until(alertIsPresent());
+            alert.accept();
+
+            button2.click();
+            Alert prompt = wait.until(alertIsPresent());
+            prompt.sendKeys("SUPER");
+            prompt.accept();
+
+            Alert alert2 = wait.until(alertIsPresent());
+            Thread.sleep(2000);
+            alert2.accept();
+
+            button3.click();
+
+            Alert alert3 = wait.until(alertIsPresent());
+            alert3.dismiss();
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+            finally {
+            Thread.sleep(10000);
+            driver.quit();
+
+        }
+
+    }
+
+
+    }
